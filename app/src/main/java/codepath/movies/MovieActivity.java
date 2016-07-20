@@ -51,4 +51,12 @@ public class MovieActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void bindMoviesArrayToListView() {
+        lvItems = (ListView) findViewById(R.id.lvMovies);
+        movies = new ArrayList<>();
+        movieAdapter = new MovieArrayAdapter(this, movies);
+        lvItems.setAdapter(movieAdapter);
+    }
+
 }
