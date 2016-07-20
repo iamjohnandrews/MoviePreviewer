@@ -1,4 +1,4 @@
-package codepath.movies.Movie;
+package codepath.movies.Model;
 
 import org.json.JSONArray;
 import org.json.JSONException;

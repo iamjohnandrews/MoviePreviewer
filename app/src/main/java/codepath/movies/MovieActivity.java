@@ -1,6 +1,5 @@
 package codepath.movies;
 
-import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
@@ -14,12 +13,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import codepath.movies.Adapter.MovieArrayAdapter;
 import cz.msebera.android.httpclient.Header;
 
 public class MovieActivity extends AppCompatActivity {
 
     private  static final String baseMovieURL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
-    ArrayList<Movie> movies;
+    ArrayList<codepath.movies.Model.Movie> movies;
     MovieArrayAdapter movieAdapter;
     ListView lvItems;
 
@@ -28,6 +28,9 @@ public class MovieActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
+
+        bindMoviesArrayToListView();
+        networkingCodeSetup();
     }
 
     private void networkingCodeSetup() {
@@ -38,7 +41,7 @@ public class MovieActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     JSONArray movieJSONresults = response.getJSONArray("results");
-                    movies = Movie.fromJSONArray(movieJSONresults);
+                    movies = codepath.movies.Model.Movie.fromJSONArray(movieJSONresults);
                     movieAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
