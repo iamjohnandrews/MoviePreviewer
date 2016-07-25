@@ -38,6 +38,8 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough
 
+Here's a walkthrough of implemented user stories:
+
 ![](http://imgur.com/G8Vuwy9.gif)
 
 ## Notes
