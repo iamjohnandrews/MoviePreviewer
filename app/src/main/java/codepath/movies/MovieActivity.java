@@ -41,7 +41,7 @@ public class MovieActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     JSONArray movieJSONresults = response.getJSONArray("results");
-                    movies = codepath.movies.Model.Movie.fromJSONArray(movieJSONresults);
+                    movies.addAll(codepath.movies.Model.Movie.fromJSONArray(movieJSONresults));
                     movieAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
