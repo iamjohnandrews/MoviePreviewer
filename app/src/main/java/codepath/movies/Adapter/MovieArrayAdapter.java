@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import codepath.movies.Model.Movie;
@@ -41,6 +43,8 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
+
+        Picasso.with(getContext()).load(movie.getPosterPath()).into(ivImage);
 
         return convertView;
     }
