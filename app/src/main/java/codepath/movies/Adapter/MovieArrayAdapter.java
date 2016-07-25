@@ -21,6 +21,7 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
  */
 
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
+    private static final String youTubeAPIkey = "AIzaSyB86A2X3nfrMfN90JmnBP_qOy8xyN3glDg";
 
     public MovieArrayAdapter(Context context, List<Movie> movies) {
         super(context, android.R.layout.simple_list_item_1, movies);
