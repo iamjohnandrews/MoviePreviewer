@@ -1,4 +1,4 @@
-# Project 1 - *Name of App Here*
+# Project 1 - *MoviePreviewer*
 
 **MoviePreviewer** shows the latest movies currently playing in theaters. The app utilizes the Movie Database API to display images and basic information about these movies to the user.
 
@@ -38,9 +38,9 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
+Currently having Technical Difficulties
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+// <img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ## Notes
 
@@ -53,7 +53,7 @@ Had difficulty using trying to implement the YouTubePlayer
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2016] [John Andrews]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
