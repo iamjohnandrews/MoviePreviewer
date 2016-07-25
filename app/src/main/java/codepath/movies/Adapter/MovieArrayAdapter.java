@@ -22,6 +22,11 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
+    private static class ViewHolder {
+        TextView movieTitle;
+        TextView movieOverview;
+    }
+
     public MovieArrayAdapter(Context context, List<Movie> movies) {
         super(context, android.R.layout.simple_list_item_1, movies);
 
@@ -29,13 +34,24 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
 
         if (convertView == null) {
             LayoutInflater inflator = LayoutInflater.from(getContext());
             convertView = inflator.inflate(R.layout.item_movie, parent, false);
+
+            viewHolder = new ViewHolder();
+            viewHolder.movieTitle = (TextView) convertView.findViewById(R.id.tvTitle);
+            viewHolder.movieOverview = (TextView) convertView.findViewById(R.id.tvOverview);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
        setContentOfUIElements(convertView, getItem(position));
+        Movie currentMovie = getItem(position);
+        viewHolder.movieTitle.setText(currentMovie.getTitle());
+        viewHolder.movieOverview.setText(currentMovie.getOverview());
 
         return convertView;
     }
@@ -43,12 +59,6 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
     private void setContentOfUIElements(View convertView, Movie currentMovie) {
         ImageView ivImage = (ImageView) convertView.findViewById(R.id.ivMovieImage);
         ivImage.setImageResource(0);
-
-        TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-        TextView tvOverview = (TextView) convertView.findViewById(R.id.tvOverview);
-
-        tvTitle.setText(currentMovie.getTitle());
-        tvOverview.setText(currentMovie.getOverview());
 
         Picasso.with(getContext()).load(currentMovie.getPosterPath()).fit().placeholder(R.drawable.coming_soon_placeholder).transform(new RoundedCornersTransformation(50, 10)).into(ivImage);
     }
