@@ -14,6 +14,7 @@ import java.util.List;
 
 import codepath.movies.Model.Movie;
 import codepath.movies.R;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 /**
  * Created by andrj148 on 7/19/16.
@@ -28,24 +29,30 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Movie movie = getItem(position);
 
         if (convertView == null) {
             LayoutInflater inflator = LayoutInflater.from(getContext());
             convertView = inflator.inflate(R.layout.item_movie, parent, false);
         }
 
+       setContentOfUIElements(convertView, getItem(position));
+
+        return convertView;
+    }
+
+    private void setContentOfUIElements(View convertView, Movie currentMovie) {
         ImageView ivImage = (ImageView) convertView.findViewById(R.id.ivMovieImage);
         ivImage.setImageResource(0);
 
         TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
         TextView tvOverview = (TextView) convertView.findViewById(R.id.tvOverview);
 
-        tvTitle.setText(movie.getTitle());
-        tvOverview.setText(movie.getOverview());
+        tvTitle.setText(currentMovie.getTitle());
+        tvOverview.setText(currentMovie.getOverview());
 
-        Picasso.with(getContext()).load(movie.getPosterPath()).into(ivImage);
+        String currentMovieImageURL = currentMovie.getPosterPath();
 
-        return convertView;
+        Picasso.with(getContext()).load(currentMovieImageURL).into(ivImage);
+        Picasso.with(getContext()).load(currentMovieImageURL).transform(new RoundedCornersTransformation(50, 10)).into(ivImage);
     }
 }
