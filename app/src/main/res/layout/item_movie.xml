@@ -28,4 +28,13 @@
         android:layout_below="@+id/tvTitle"
         android:layout_toRightOf="@+id/ivMovieImage"
         android:layout_toEndOf="@+id/ivMovieImage" />
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/youTubeView"
+        android:layout_below="@+id/ivMovieImage"
+        android:layout_alignRight="@+id/tvOverview"
+        android:layout_alignEnd="@+id/tvOverview"
+        android:layout_marginTop="45dp" />
 </RelativeLayout>

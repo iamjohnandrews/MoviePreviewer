@@ -21,8 +21,6 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
  */
 
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
-    private static final String youTubeAPIkey = "AIzaSyB86A2X3nfrMfN90JmnBP_qOy8xyN3glDg";
-
     public MovieArrayAdapter(Context context, List<Movie> movies) {
         super(context, android.R.layout.simple_list_item_1, movies);
 
@@ -32,8 +30,8 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            LayoutInflater inflator = LayoutInflater.from(getContext());
-            convertView = inflator.inflate(R.layout.item_movie, parent, false);
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.item_movie, parent, false);
         }
 
        setContentOfUIElements(convertView, getItem(position));
