@@ -1,13 +1,13 @@
 package codepath.movies;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,6 +23,8 @@ public class MovieActivity extends AppCompatActivity {
     ArrayList<codepath.movies.Model.Movie> movies;
     MovieArrayAdapter movieAdapter;
     ListView lvItems;
+    private SwipeRefreshLayout swipeContainer;
+    private AsyncHttpClient client;
 
 
     @Override
@@ -31,19 +33,20 @@ public class MovieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie);
 
         bindMoviesArrayToListView();
-        networkingCodeSetupAndRetrieveData();
+        setUpSwipeToRefresh();
+        client = new AsyncHttpClient();
+        retrieveMovieData();
     }
 
-    private void networkingCodeSetupAndRetrieveData() {
-
-        AsyncHttpClient client = new AsyncHttpClient();
+    private void retrieveMovieData() {
         client.get(baseMovieURL, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    JSONArray movieJSONresults = response.getJSONArray("results");
-                    movies.addAll(Movie.fromJSONArray(movieJSONresults));
+                    movieAdapter.clear();
+                    movies.addAll(Movie.fromJSONArray(response.getJSONArray("results")));
                     movieAdapter.notifyDataSetChanged();
+                    swipeContainer.setRefreshing(false);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -61,6 +64,16 @@ public class MovieActivity extends AppCompatActivity {
         movies = new ArrayList<>();
         movieAdapter = new MovieArrayAdapter(this, movies);
         lvItems.setAdapter(movieAdapter);
+    }
+
+    private void setUpSwipeToRefresh() {
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                retrieveMovieData();
+            }
+        });
     }
 
 }
