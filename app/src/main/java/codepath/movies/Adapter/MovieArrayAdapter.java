@@ -50,9 +50,6 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         tvTitle.setText(currentMovie.getTitle());
         tvOverview.setText(currentMovie.getOverview());
 
-        String currentMovieImageURL = currentMovie.getPosterPath();
-
-        Picasso.with(getContext()).load(currentMovieImageURL).into(ivImage);
-        Picasso.with(getContext()).load(currentMovieImageURL).transform(new RoundedCornersTransformation(50, 10)).into(ivImage);
+        Picasso.with(getContext()).load(currentMovie.getPosterPath()).fit().placeholder(R.drawable.coming_soon_placeholder).transform(new RoundedCornersTransformation(50, 10)).into(ivImage);
     }
 }
