@@ -68,6 +68,7 @@ public class MovieActivity extends AppCompatActivity {
 
     private void setUpSwipeToRefresh() {
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        configureRefreshingColors();
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -76,4 +77,11 @@ public class MovieActivity extends AppCompatActivity {
         });
     }
 
+    private void configureRefreshingColors() {
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_green_light,
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+    }
 }
