@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import codepath.movies.Adapter.MovieArrayAdapter;
+import codepath.movies.Model.Movie;
 import cz.msebera.android.httpclient.Header;
 
 public class MovieActivity extends AppCompatActivity {
@@ -30,10 +31,10 @@ public class MovieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie);
 
         bindMoviesArrayToListView();
-        networkingCodeSetup();
+        networkingCodeSetupAndRetrieveData();
     }
 
-    private void networkingCodeSetup() {
+    private void networkingCodeSetupAndRetrieveData() {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(baseMovieURL, new JsonHttpResponseHandler(){
@@ -41,7 +42,7 @@ public class MovieActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     JSONArray movieJSONresults = response.getJSONArray("results");
-                    movies.addAll(codepath.movies.Model.Movie.fromJSONArray(movieJSONresults));
+                    movies.addAll(Movie.fromJSONArray(movieJSONresults));
                     movieAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
